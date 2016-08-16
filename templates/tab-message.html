@@ -1,0 +1,16 @@
+<ion-view>
+	<ion-content on-swipe-left="onSwipeLeft()">
+		<ion-list class="">
+		<ion-item ng-repeat="message in messages" class="item-avatar item-text-right">
+		    <img ng-src="{{message.pic}}" >
+		    <span class="rj-sm-red-icon" ng-show="message.showHints">
+		    	<p ng-bind="message.noReadMessages"></p>
+		    </span>
+		    <h2>{{message.name}}</h2>
+		    <p>{{message.lastMessage.content}}</p>
+		    <!--need a service to refersh lastsetTalkDate to now-->
+		    <span>{{message.lastMessage.originalTime || date}}</span>
+		  </ion-item>
+		</ion-list>
+	</ion-content>	
+</ion-view>

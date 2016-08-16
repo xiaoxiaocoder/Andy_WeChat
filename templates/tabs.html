@@ -1,0 +1,31 @@
+<ion-header-bar class="bar-dark" align-title="left">
+<!--Left Button-->
+<!--<div class="buttons">
+	<button class="button" ng-click="doSomeThing()">Left Button</button>
+</div>-->
+<h1 class="title">WeChat(43)</h1>
+<div class="buttons">
+	<button class="button no-animation button-icon icon ion-android-search"></button>
+    <button class="button no-animation button-icon icon ion-android-add"></button>
+</div>
+</ion-header-bar>
+
+<!--ion-tab-->
+<ion-tabs class="tabs-icon-top tabs-color-active-balanced">
+	<ion-tab title="Chats" icon-on="ion-ios-chatbubble" icon-off="ion-ios-chatbubble-outline" href="#/tab/message" badge="2" badge-style="badge-assertive">
+		<ion-nav-view animation="slide-left-right" name="tab-message"></ion-nav-view>
+	</ion-tab>
+
+	<ion-tab title="Contacts" icon-on="ion-ios-people" icon-off="ion-ios-people-outline"  href="#/tab/contact">
+		<ion-nav-view animation="slide-left-right" name="tab-contact"></ion-nav-view>
+	</ion-tab>
+
+	<ion-tab title="Discover" icon-on="ion-ios-paw" icon-off="ion-ios-paw-outline"  href="#/tab/discover">
+		<ion-nav-view animation="slide-left-right" name="tab-discover"></ion-nav-view>
+	</ion-tab>
+
+	<ion-tab title="Me" icon-on="ion-ios-person" icon-off="ion-ios-person-outline" href="#/tab/me">
+		<ion-nav-view animation="slide-left-right" name="tab-me"></ion-nav-view>
+	</ion-tab>
+</ion-tabs>
+

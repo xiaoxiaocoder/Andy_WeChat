@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" ng-app="ionic_directives">
+<head>
+	<meta charset="UTF-8">
+	<title>Ionic Header & Footer</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+	<link rel="stylesheet" type="text/css" href="../../lib/ionic/css/ionic.css">
+	<script type="text/javascript" src="../../lib/ionic/js/ionic.bundle.js"></script>
+</head>
+<body ng-controller="header_footer_Ctrl">
+	<!-- align-title: left/center/right
+	no-tap-scroll: true/false -->
+<ion-header-bar class="bar-royal" align-title="left" no-tap-scroll="false">
+	<h1 class="title">Header & Footer</h1>
+</ion-header-bar>
+<ion-content>
+	<ion-list>
+		<ion-item class="item-divider">HE</ion-item>
+		<ion-item ng-repeat="item in items">{{item}}</ion-item>
+	</ion-list>
+</ion-content>
+<!-- align-title:left/center/right -->
+<ion-footer-bar class="bar-light" align-title="right">
+	<div class="buttons">
+		<button class="button button-assertive button-outline">Left</button>
+	</div>
+		<h1 class="title">Footer</h1>
+	<div class="buttons">
+		<button class="button  button-clear button-dark ">right</button>
+	</div>
+</ion-footer-bar>
+</body>
+</html>
+<script type="text/javascript">
+angular.module('ionic_directives',['ionic'])
+.controller('header_footer_Ctrl',function($scope){
+	$scope.items=[];
+	for (var i = 0; i < 20; i++) {
+		$scope.items[i]='Item'+i;
+	}
+})
+
+</script>

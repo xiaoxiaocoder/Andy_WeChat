@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" ng-app="gesture_event">
+<head>
+	<meta charset="UTF-8" >
+	<title>ionic gestures and events</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+	<link rel="stylesheet" type="text/css" href="../../lib/ionic/css/ionic.css">
+	<script type="text/javascript" src="../../lib/ionic/js/ionic.bundle.js"></script>
+</head>
+<body ng-controller="gesture_event_Ctrl">
+<ion-header-bar class="bar-energized">
+<h1 class="title">gestures and Events</h1>
+</ion-header-bar>
+<ion-content>
+<ion-list>
+	<ion-refresher pulling-text="refresh...." on-refresh="doRefresh()"></ion-refresher>
+	<ion-item ng-repeat="item in gestures">{{item}}</ion-item>
+</ion-list>
+</ion-content>
+</body>
+</html>
+<script type="text/javascript">
+	angular.module('gesture_event',['ionic'])
+	.controller('gesture_event_Ctrl',function($scope,$ionicGesture){
+		$scope.gestures=['on-hold','on-tap','on-double-tap','on-touch','on-release','on-drag','on-drag-up','on-drap-right','on-drag-down','on-drag-left','on-swip','on-swip-up/right/down/left'];
+		$scope.doRefresh=function(){
+			alert('refresh');
+			$scope.$broadcast('scroll.refreshComplete');
+		}
+	})
+
+</script>

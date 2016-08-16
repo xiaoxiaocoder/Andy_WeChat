@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" ng-app='ionic-directves'>
+<head>
+	<meta charset="UTF-8">
+	<title>Ionic list</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+	<link rel="stylesheet" href="../../lib/ionic/css/ionic.css">
+	<script type="text/javascript" src="../../lib/ionic/js/ionic.bundle.js"></script>
+</head>
+<body ng-controller="listCtrl">
+<ion-header-bar class="bar-positive">
+<div class="buttons">
+	<button class="button button-icon icon ion-ios-minus-outline" ng-click="showDelete=!showDelete;showReorder=false;"></button>
+</div>
+	<h1 class="title">list</h1>
+	<button class="button" ng-click="showReorder=!showReorder;showDelete=false;">Reorder</button>
+</ion-header-bar>
+<ion-content>
+	<ion-list 
+			show-delete="showDelete"
+			show-reorder="showReorder"
+			can-swipe="canSwipe"
+		>
+<!-- collection-repeat
+collection-repeat	expression	
+The expression indicating how to enumerate a collection, of the format variable in expression ¨C where variable is the user defined loop variable and expression is a scope expression giving the collection to enumerate. For example: album in artist.albums or album in artist.albums | orderBy:'name'.
+
+item-width
+(optional)
+expression	
+The width of the repeated element. The expression must return a number (pixels) or a percentage. Defaults to the width of the first item in the list. (previously named collection-item-width)
+
+item-height
+(optional)
+expression	
+The height of the repeated element. The expression must return a number (pixels) or a percentage. Defaults to the height of the first item in the list. (previously named collection-item-height)
+
+item-render-buffer
+(optional)
+number	
+The number of items to load before and after the visible items in the list. Default 3. Tip: set this higher if you have lots of images to preload, but don't set it too high or you'll see performance loss.
+
+force-refresh-images
+(optional)
+boolean	
+Force images to refresh as you scroll. This fixes a problem where, when an element is interchanged as scrolling, its image will still have the old src while the new src loads. Setting this to true comes with a small performance loss.
+
+ -->
+<!-- ng-repeat -->
+		<ion-item collection-repeat="item in items" class="item-thumbnail-left">
+			<img ng-src="{{item.picture.medium}}" alt="">
+			<h2>{{item.name.title}} {{item.name.first}} {{item.name.last}}</h2>
+			<p>Phone:{{item.phone}}</p>
+			<ion-option-button class="button-positive" ng-click="share(item)">Share</ion-option-button>
+			<ion-option-button class="button-energized" ng-click="edit(item)">Edit</ion-option-button>
+			<ion-delete-button class="ion-minus-circled" ng-click="items.splice($index, 1)"></ion-delete-button>
+			<ion-reorder-button class="ion-navicon" on-reorder="reorderItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+		</ion-item>
+	</ion-list>
+</ion-content>
+<ion-footer-bar class="bar-stable">
+	<h1 class="title">...</h1>
+</ion-footer-bar>
+</body>
+</html>
+<script type="text/javascript">
+	angular.module('ionic-directves',['ionic'])
+	.controller('listCtrl',function($scope,$http){
+		$http({method: 'GET',url:'http://api.randomuser.me/?results=50'}).then(function(result){
+			$scope.items=result.data.results;
+		})
+		$scope.showDelete=false;
+		$scope.showReorder=false;
+		$scope.canSwipe=true;
+		$scope.reorderItem=function(item,$fromIndex,$toIndex){
+			$scope.items.splice($fromIndex,1);
+			$scope.items.splice($toIndex,0,item)
+		};
+		$scope.share=function(item){
+			alert(item.email);
+		}
+		$scope.edit=function(item){
+			alert(item.phone);
+		}
+
+	})
+</script>

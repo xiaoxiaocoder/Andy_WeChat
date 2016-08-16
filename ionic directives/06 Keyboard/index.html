@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" ng-app="ionic-directives">
+<head>
+	<meta charset="UTF-8">
+	<title>Ionic keyboard</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+	<link rel="stylesheet" href="../../lib/ionic/css/ionic.css">
+	<script type="text/javascript" src="../../lib/ionic/js/ionic.bundle.js"></script>
+</head>
+<body ng-controller="keyboardCtrl">
+<ion-header-bar class="bar-dark">
+	<h1 class="title">keyboard</h1>
+</ion-header-bar>
+<ion-content>
+	<div class="hide-on-keyboard-open">
+		<div class="google-map">
+		<pre>	Plugin Usage
+Information on using the plugin can be found at https://github.com/driftyco/ionic-plugins-keyboard.
+
+Android Notes
+If your app is running in fullscreen, i.e. you have <preference name="Fullscreen" value="true" /> in your config.xml file you will need to set ionic.Platform.isFullScreen = true manually.
+
+You can configure the behavior of the web view when the keyboard shows by setting android:windowSoftInputMode to either adjustPan, adjustResize or adjustNothing in your app's activity in AndroidManifest.xml. adjustResize is the recommended setting for Ionic, but if for some reason you do use adjustPan you will need to set ionic.Platform.isFullScreen = true.
+
+  <activity android:windowSoftInputMode="adjustResize">
+iOS Notes
+If the content of your app (including the header) is being pushed up and out of view on input focus, try setting cordova.plugins.Keyboard.disableScroll(true). This does not disable scrolling in the Ionic scroll view, rather it disables the native overflow scrolling that happens automatically as a result of focusing on inputs below the keyboard.</pre>
+		</div>
+		
+	</div>
+</ion-content>
+
+<p>
+	keyboard-attach
+
+keyboard-attach is an attribute directive which will cause an element to float above the keyboard when the keyboard shows. Currently only supports the ion-footer-bar directive.
+
+Notes
+This directive requires the Ionic Keyboard Plugin.
+On Android not in fullscreen mode, i.e. you have <preference name="Fullscreen" value="false" /> or no preference in your config.xml file, this directive is unnecessary since it is the default behavior.
+On iOS, if there is an input in your footer, you will need to set cordova.plugins.Keyboard.disableScroll(true)
+</p>
+<ion-footer-bar class="bar-assertive" keyboard-attach>
+	<h1 class="title">title</h1>
+
+	<input type="">	
+</ion-footer-bar>
+</body>
+</html>
+<script type="text/javascript">
+	angular.module('ionic-directives',['ionic'])
+	.controller('keyboardCtrl',function($scope){
+
+	})
+</script>
+

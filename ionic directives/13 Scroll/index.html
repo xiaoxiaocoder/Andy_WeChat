@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" ng-app="ionic-scroll">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+	<title>Ionic-scroll</title>
+	<link rel="stylesheet" href="../../lib/ionic/css/ionic.css">
+	<script type="text/javascript" src="../../lib/ionic/js/ionic.bundle.js"></script>
+	<style type="text/css">
+	div.scroll-img{
+		width: 2560px;
+		height: 1600px;
+		background: url('2.jpg') repeat;
+	}
+	</style>
+</head>
+<body ng-controller="scrollCtrl">
+	<ion-header-bar class="bar-royal">
+		<h1 class="title">{{title}}</h1>
+	</ion-header-bar>
+	<ion-content>
+		<div class="card">
+		<div class="item calm balanced-border item-button-right">
+		<div class="buttons">
+			<!-- <a ng-click="scrollToBottoom()" class="button">Scroll to Bottom!</a> -->
+			<a class="button button-icon icon ion-cube" ng-click="scrollTo()"></a>
+		</div>
+		scroll
+		</div>
+		<img src="2.jpg" alt="" >
+		<ion-item class="item-body">	
+			<!-- ion-infinite-scroll -->
+			<ion-scroll zooming="true" direction="xy" delegate-handle="small" style="max-height:800px;">
+				
+
+				<button ng-click="scrollSmallToTop()">
+        		Scroll small area to top!
+      		</button>
+			</ion-scroll>
+		</ion-item>
+
+		<div class="item ">
+ 			<a ng-click="scrollToTop()" class="button">Scroll to Top!</a>
+		</div>
+	</div>
+	
+</ion-content>
+
+<script type="text/javascript">
+//$ionicScrollDelegate
+
+	angular.module('ionic-scroll',['ionic'])
+	.controller('scrollCtrl',function($scope,$ionicScrollDelegate){
+		$scope.title="scroll";
+		$scope.scrollToTop=function(){
+			$ionicScrollDelegate.scrollTop();
+		}
+		$scope.scrollToBottoom=function(){
+			$ionicScrollDelegate.scrollBottom();
+		}
+		$scope.scrollSmallToTop=function(){
+			 $ionicScrollDelegate.$getByHandle('small').scrollTop();
+		}
+		$scope.scrollTo=function(){
+			$ionicScrollDelegate.scrollTo(500,500,true);
+		}
+	})
+</script>	
+</body>
+</html>

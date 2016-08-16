@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" ng-app="form">
+<head>
+	<meta charset="UTF-8">
+	<title>ionic form input</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+	<link rel="stylesheet" href="../../lib/ionic/css/ionic.css">
+	<script type="text/javascript" src="../../lib/ionic/js/ionic.bundle.js"></script>
+</head>
+<body ng-controller="inputCtrl">
+<ion-header-bar class="bar-positive">
+<h1 class="title">title</h1>
+</ion-header-bar>
+<ion-content>
+	<ion-list>
+		<!-- ion-checkbox -->
+		<ion-item class="item-divider">CheckBox</ion-item>
+		<ion-checkbox class="item checkbox-balanced" ng-repeat="item in checkboxs" ng-model="item.checked" >{{item.label}}</ion-checkbox>
+		<ion-item>
+			<pre>
+				{{checkboxs | json}}<>
+			</pre>
+		</ion-item>
+		
+		<!-- ion-radio -->
+		<ion-item class="item-divider">Radio Button</ion-item>
+		<ion-radio  ng-repeat="item in radios" 
+					ng-value="item.value"
+					ng-model="data.radioValue">
+			{{item.text}}
+		</ion-radio>
+
+		<!-- ion-toggle -->
+		<ion-item class="item-divider">ion-toggle</ion-item>
+		<ion-toggle ng-repeat="item in toggles" ng-model="item.checked" toggle-class="toggle-assertive">{{item.label}}</ion-toggle>
+
+	</ion-list>
+</ion-content>
+</body>
+</html>
+<script type="text/javascript">
+	angular.module('form',['ionic'])
+	.controller('inputCtrl',function($scope){
+		$scope.checkboxs=[
+				{label:"HTML 5",checked:true},
+				{label:"CSS 3"},
+				{label:"Javascript"}
+			];
+		$scope.radios=[
+			{text: "HTML 5",value:"h5"},
+			{text: "CSS 3",value:"css3"},
+			{text: "Javascript",value:"js"}
+			];
+		$scope.data={radioValue:"js"};
+
+		$scope.toggles=[
+				{label:"HTML 5",checked:true},
+				{label:"CSS 3"},
+				{label:"Javascript"}
+			];
+  
+	})
+
+</script>

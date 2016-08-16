@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" ng-app="content">
+<head>
+	<meta charset="UTF-8">
+	<title>ionic content</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+	<link rel="stylesheet" type="text/css" href="../../lib/ionic/css/ionic.css">
+	<script type="text/javascript" src="../../lib/ionic/js/ionic.bundle.js"></script>
+</head>
+<body ng-controller="contentCtrl">
+<ion-header-bar class="bar-calm">
+<h1 class="title">content</h1>
+</ion-header-bar>
+
+<!--
+The ionContent directive provides an easy to use content area that can be configured to use Ionic's custom Scroll View, or the built in overflow scrolling of the browser.
+
+While we recommend using the custom Scroll features in Ionic in most cases, sometimes (for performance reasons) only the browser's native overflow scrolling will suffice, and so we've made it easy to toggle between the Ionic scroll implementation and overflow scrolling.
+
+You can implement pull-to-refresh with the ionRefresher directive, and infinite scrolling with the ionInfiniteScroll directive.
+
+Be aware that this directive gets its own child scope. If you do not understand why this is important, you can read https://docs.angularjs.org/guide/scope.
+delegate-handle
+(optional)
+string	
+The handle used to identify this scrollView with $ionicScrollDelegate.
+
+常用属性：direction,scroll,on-scroll  ?????,on-scroll-complete
+-->	
+<ion-content on-scroll="" on-scroll-complete="isScroll">
+<ion-refresher 
+			pulling-text="Pull to refresh..."  
+			on-refresh="doRefresh()"
+			on-pulling="onPulling()"
+			pulling-icon="ion-android-arrow-down"
+			refreshing-icon=""
+
+			>
+</ion-refresher>
+
+<ion-list>
+		<ion-item ng-repeat="item in items track by $index">{{item}}</ion-item>
+</ion-list>
+
+</ion-content>
+
+</body>
+</html>
+<script type="text/javascript">
+	angular.module('content',['ionic'])
+	.controller('contentCtrl',function($scope,$ionicScrollDelegate){
+		$scope.isScroll=false;
+		$scope.items=[1,2,3];
+		$scope.onPulling=function(){
+			console.log('onPulling');
+		}
+		$scope.doRefresh=function(){
+			for (var i = 4; i <= 10; i++) {
+				$scope.items.push(i);
+			};
+
+		 $scope.$broadcast('scroll.refreshComplete');
+		}
+
+	})
+</script>

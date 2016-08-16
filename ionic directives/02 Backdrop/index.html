@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" ng-app="backdrop">
+<head>
+	<meta charset="UTF-8">
+	<title>ionic-backdrop</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+	<link rel="stylesheet" href="../../lib/ionic/css/ionic.css">
+	<script type="text/javascript" src="../../lib/ionic/js/ionic.bundle.js"></script>
+
+</head>
+<body ng-controller="backDropCtrl">
+    <!-- The nav bar that will be updated as we navigate -->
+<!--     <ion-nav-bar class="bar-positive">
+	    
+	 
+</ion-nav-bar> -->
+     <ion-header-bar class="bar-assertive">
+		  <h1 class="title">Title</h1>
+		 <div class="buttons">
+		 	<a class="button button-icon icon ion-settings" ng-click="showBackDrop()"></a>
+		 </div>
+	</ion-header-bar>
+
+ 
+   <!-- where the initial view template will be rendered -->
+    <ion-nav-view>
+      <ion-view>
+        <ion-content class="has-header padding">Hello!</ion-content>
+      </ion-view>
+    </ion-nav-view>
+</body>
+
+</html>
+<script type="text/javascript">
+	angular.module('backdrop',['ionic'])
+	.controller('backDropCtrl',function($scope,$ionicBackdrop,$timeout){
+		$scope.showBackDrop=function(){
+			$ionicBackdrop.retain();
+			$timeout(function() {
+				$ionicBackdrop.release();
+				alert('release');
+			}, 1000);
+		}
+	})
+</script>

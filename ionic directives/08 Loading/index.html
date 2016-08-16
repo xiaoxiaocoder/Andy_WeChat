@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" ng-app="ionic-directives">
+<head>
+	<meta charset="UTF-8">
+	<title>ionci loading</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+	<link rel="stylesheet" href="../../lib/ionic/css/ionic.css">
+	<script type="text/javascript" src="../../lib/ionic/js/ionic.bundle.js"></script>
+</head>
+<body ng-controller="loadingCtrl">
+<ion-header-bar class="bar-positive">
+	<h1 class="title">Loading</h1>
+</ion-header-bar>
+<ion-content>
+	<ion-list>
+		<ion-item collection-repeat="item in items" class="item-thumbnail-left">
+			<img ng-src="{{item.picture.medium}}" alt="">
+			<h2>{{item.name.title}} {{item.first}},{{item.last}}</h2>
+		</ion-item>
+</ion-list>
+</ion-content>
+</body>
+</html>
+<!-- show(opts)
+Shows a loading indicator. If the indicator is already shown, it will set the options given and keep the indicator shown.
+
+Param	Type	Details
+opts	object	
+The options for the loading indicator. Available properties:
+
+{string=} template The html content of the indicator.
+{string=} templateUrl The url of an html template to load as the content of the indicator.
+{object=} scope The scope to be a child of. Default: creates a child of $rootScope.
+{boolean=} noBackdrop Whether to hide the backdrop. By default it will be shown.
+{boolean=} hideOnStateChange Whether to hide the loading spinner when navigating to a new state. Default false.
+{number=} delay How many milliseconds to delay showing the indicator. By default there is no delay.
+{number=} duration How many milliseconds to wait until automatically hiding the indicator. By default, the indicator will be shown until .hide() is called.
+hide()
+Hides the loading indicator, if shown. -->
+
+<script type="text/javascript">
+	angular.module('ionic-directives',['ionic'])
+	.constant('$ionicLoadingConfig',{
+		template:"Loading ........11"
+	})
+	.controller('loadingCtrl',function($scope,$http,$ionicLoading){
+		 $ionicLoading.show({
+		 		//template: 'Loading...'
+		 	});
+		$http.get('http://api.randomuser.me/?results=50').then(function(response){
+			$scope.items=response.data.results;
+			$ionicLoading.hide();
+		});
+	})
+</script>

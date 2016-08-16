@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" ng-app="actionSheet">
+<head>
+	<meta charset="UTF-8">
+	<title>ionic-action sheet</title>
+	<meate name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+	<link rel="stylesheet" type="text/css" href="../../lib/ionic/css/ionic.css">
+	<script type="text/javascript" src="../../lib/ionic/js/ionic.bundle.js"></script>
+
+</head>
+<body ng-controller="actionSheetCtrl">
+<ion-header-bar class="bar-positive">
+
+<h1 class="title">Title</h1>
+<a href="" class="button button-icon icon ion-settings" ng-click="showAS()"></a>
+</ion-header-bar>
+<ion-content>
+Hello
+</ion-content>
+
+</body>
+<!-- show(options)
+ Load and return a new action sheet.
+ 
+ A new isolated scope will be created for the action sheet and the new element will be appended into the body.
+ 
+ Param	Type	Details
+ options	object	
+ The options for this ActionSheet. Properties:
+ 
+ [Object] buttons 
+ 	Which buttons to show. Each button is an object with a text field.
+ {string} titleText 
+ 	The title to show on the action sheet.
+ {string=} cancelText 
+ 	the text for a 'cancel' button on the action sheet.
+ {string=} destructiveText 
+ 	The text for a 'danger' on the action sheet.
+ {function=} cancel 
+ 	Called if the cancel button is pressed, the backdrop is tapped or the hardware back button is pressed.
+ {function=} buttonClicked 
+ 	Called when one of the non-destructive buttons is clicked, with the index of the button that was clicked and the button object. Return true to close the action sheet, or false to keep it opened.
+ {function=} destructiveButtonClicked 
+ 	Called when the destructive button is clicked. Return true to close the action sheet, or false to keep it opened.
+ {boolean=} cancelOnStateChange 
+ 	Whether to cancel the actionSheet when navigating to a new state. Default true.
+ {string} cssClass
+ 	 The custom CSS class name.
+ Returns: function hideSheet A function which, when called, hides & cancels the action --> 
+
+<script type="text/javascript">
+	angular.module('actionSheet',['ionic'])
+	.controller('actionSheetCtrl',function($scope,$ionicActionSheet,$timeout){
+		$scope.showAS=function(){
+			var hideSheet=$ionicActionSheet.show({
+				buttons:[
+					{text:"<b>Share</b>"},
+					{text:"Move"}
+				],
+				titleText:"Action Sheet",
+				cancelText:"Cancle Text",
+				cancel:function(){
+					alert('cancle');
+				},
+				destructiveText:"Delete",
+				destructiveButtonClicked:function(){
+					alert('delete');
+				},
+				buttonClicked:function(index){
+					alert(index);
+				},
+				cancelOnStateChange:true,
+				cssClass:"my-action-sheet-css"
+			});
+
+			$timeout(function() {
+				hideSheet();
+			}, 2000);
+		}; 
+	})
+</script>
+</html>

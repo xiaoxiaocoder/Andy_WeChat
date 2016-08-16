@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" ng-app="ionic - directives">
+<head>
+	<meta charset="UTF-8">
+	<title>ionic - Modal</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+	<link rel="stylesheet" href="../../lib/ionic/css/ionic.css">
+	<script type="text/javascript" src="../../lib/ionic/js/ionic.bundle.js"></script>
+</head>
+<body ng-controller="ModalCtrl">
+<ion-header-bar class="bar-energized">
+	<h1 class="title">Modal</h1>
+	<a class="button button-icon icon ion-navicon" ng-click="showModal()"></a>
+</ion-header-bar>
+<ion-content>
+<pre>
+Methods:initialize,show,hide,remove,isShow
+Options:
+options	object	An options object with the following properties:
+
+{object=} scope The scope to be a child of. Default: creates a child of $rootScope.
+{string=} animation The animation to show & hide with. Default: 'slide-in-up'
+{boolean=} focusFirstInput Whether to autofocus the first input of the modal when shown. Default: false.
+{boolean=} backdropClickToClose Whether to close the modal on clicking the backdrop. Default: true.
+{boolean=} hardwareBackButtonClose Whether the modal can be closed using the hardware back button on Android and similar devices. Default: true.	
+</pre>
+
+</ion-content>	
+</body>
+</html>
+<script type="text/javascript">
+	angular.module('ionic - directives',['ionic'])
+	.controller('ModalCtrl',function($scope,$ionicModal){
+		$ionicModal.fromTemplateUrl('my-modal.html',{
+			scope:$scope,
+			animateion:'slide-in-up',
+			focusFirstInput:true
+		}).then(function(modal){
+			$scope.modal=modal;
+		})
+		$scope.showModal=function(){
+			$scope.modal.show();
+		}
+	})
+	.controller('modalViewCtrl',function($scope,$ionicModal){
+
+		$scope.closeModal=function(){
+			$scope.modal.hide();
+		}
+	})
+</script>
+<script type="text/ng-template" id="my-modal.html">
+	<ion-modal-view ng-controller="modalViewCtrl">
+		<ion-header-bar class="bar-balanced">
+				<h1 class="title">Modal</h1>
+				<a class="button button-icon icon ion-close" ng-click="closeModal()"></a>
+			</ion-header-bar>
+		<ion-content scroll="false">
+			<ion-list>
+				<ion-item class="item-input">
+					<label for="">
+						<input type="text" name="" class="input" placeholder="First Name">
+					</label>
+				</ion-item>
+				<ion-item class="item-input">
+					<label for="">
+						<input type="text" name="" class="input" placeholder="Last Name">
+					</label>
+				</ion-item>
+				<ion-item class="item-input">
+					<label for="">
+						<input type="text" name="" class="input" placeholder="Please input some...">
+					</label>
+				</ion-item>
+			</ion-list>
+			
+		</ion-content>	
+	</ion-modal-view>
+</script>

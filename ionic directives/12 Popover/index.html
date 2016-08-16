@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" ng-app="ionic-popover">
+<head>
+	<meta charset="UTF-8">
+	<title>Ionic popover</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+	<link rel="stylesheet" type="text/css" href="../../lib/ionic/css/ionic.css">
+	<script type="text/javascript" src="../../lib/ionic/js/ionic.bundle.js"></script>
+	<script type="text/javascript" src="jquery 2.1.4.js"></script>
+	<style type="text/css">
+
+	#my-popover{
+		top:31px;
+		left:1100px;
+	}
+	</style>
+</head>
+<body ng-controller="popoverCtrl">
+<ion-header-bar class="bar-positive">
+<h1 class="title">Popover</h1>
+<div class="buttons">
+	<a  class="button button-icon icon ion-bug" ng-click="showPopover($event)"></a>
+	<a  class="button button-icon icon ion-close" ng-click="closePopover()"></a>
+</div>
+</ion-header-bar>
+<ion-content>
+asd
+</ion-content>
+
+<script type="text/javascript">
+//ionicPopover
+	angular.module('ionic-popover',['ionic'])
+	.controller('popoverCtrl',function($scope,$ionicPopover,$element){
+	$ionicPopover.fromTemplateUrl('popover.html', {
+	    scope: $scope,
+	    backdropClickToClose :true
+	  }).then(function(popover) {
+	    $scope.popover = popover;
+	  });
+	  /*,
+	    //positionView:function(){
+		//alert(1);//点击执行了两遍？
+	}*/
+
+	$scope.showPopover=function($event){
+		
+		$scope.popover.show($event);
+		//$element.find($scope.popoverID).parent().parent().css('background-color','rgba(0, 0, 0, 0)')
+
+		var ele=$('#'+$scope.popoverID)
+		.closest('.popover-backdrop').css('background-color','rgba(0, 0, 0, 0)')
+		.end().css({'top':'32px'});;
+		
+
+		/*.popover-backdrop.active{
+	background-color: rgba(0, 0, 0, 0);
+}*/
+	};
+	$scope.closePopover=function(){
+		$scope.popover.hide();
+
+
+	}
+	$scope.popoverID="my-popover";
+	$scope.items=[
+					{label:"add Contact",href:"#/contact"},
+					{label:"scan QR Code",href:"#/search"}
+				];
+	});
+</script>
+<script type="text/ng-template" id="popover.html">
+
+	<ion-popover-view id="{{popoverID}}" style="background-color: rgba(0, 0, 0, 0);">
+			<div class="list my-popover" >
+				<a  class="item dark-bg light" ng-repeat="item in items" href="item.href"style="border-color: #0C0C0C;">
+				{{item.label}}
+				</a>
+				
+			</div>
+	</ion-popover-view>
+</script>
+</body>
+</html>

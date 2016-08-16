@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Ionic-modal dialog</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+	<link type="text/css" rel="stylesheet" href="lib/ionic/css/ionic.css">
+	<script type="text/javascript" src="lib/ionic/js/ionic.bundle.js"></script>
+
+</head>
+<body ng-controller="myCtrl">
+	<ion-header-bar class="bar-calm">
+		<h1 class="title">{{title}}</h1>
+	
+	<div class="buttons">
+		<button class="button button-positive" ng-click="openModal()"><i class="icon ion-settings"></i>Show
+		</button>
+		<a href="" ng-click="closeModal()" class="button">
+			<i class="icon ion-close"></i>Close
+		</a>
+	</div>
+</ion-header-bar>
+<ion-content>
+<ion-list>
+	<ion-item>ssss</ion-item>
+</ion-list>
+</ion-content>
+	
+	<script type="text/javascript">
+	angular.module('myApp',['ionic'])
+	.controller('myCtrl',function($scope,$ionicModal){
+		$ionicModal.fromTemplateUrl('modal-dialog.html',{
+			scope:$scope,
+			animation:'slide-in-up'
+		}).then(function(modal){
+			$scope.modal=modal;
+		});
+
+		$scope.openModal=function(){
+			$scope.modal.show();
+		}
+		$scope.closeModal=function(){
+			$scope.modal.hide();
+		}
+		$scope.title="title";
+		$scope.modalTitle="modalTitle";
+		$scope.firstname="";
+		$scope.change=function(name){
+			$scope.title=name;
+		}
+		console.log($scope.$watch);
+		$scope.$watch('$scope.title',function(newVal,OldVal){
+			alert('newValue:'+newVal+";Old Value:"+OldVal);
+		})
+
+		$scope.modalRemove=function(){
+			$scope.modal.remove();
+		}
+
+		$scope.on('modal.removed',function(){
+
+		})
+	})
+
+	</script>
+	<script id="modal-dialog.html" type="text/ng-template">
+		<ion-modal-view>
+			<ion-header-bar class="bar-royal">
+				<h3 class="title">{{modalTitle}}</h3>
+				<div class="buttons">
+					<button class="button button-positive" ng-click="closeModal()">Close</button>
+					<a class="button" ng-click="modalRemove()">Remove</a>
+				</div>
+			</ion-header-bar>
+			<ion-content>
+				<ion-list>
+					<ion-item >
+						<label class="item-input">
+							<span>First Name</span>
+							<input type="input" ng-change="change(firstname)" ng-model="firstname">
+						</label>
+					</ion-item>
+				<ion-list>
+			</ion-content>
+		</ion-modal-view>
+	</script>
+</body>
+</html>

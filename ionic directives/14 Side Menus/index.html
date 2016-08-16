@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" ng-app="ionic-sideMenus">
+<head>
+	<meta charset="UTF-8">
+	<title>Side Menus</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+	<link style="text/css" rel="stylesheet" href="../../lib/ionic/css/ionic.css">
+	<script type="text/javascript" src="../../lib/ionic/js/ionic.bundle.js"></script>
+</head>
+<body ng-controller="SideMenusCtrl">
+<ion-side-menus>
+	<!-- edge-drag-threshold:boolean/number.    attribute
+		设置可拖拽区域据边框的距离。默认25px
+		drag-content:boolean 是否允许拖拽内容区域，显示sidemenu。默认true
+	 -->
+	<ion-side-menu-content   drag-content="false">
+	<ion-nav-view>
+			<ion-header-bar class="bar-energized" >
+			 <!-- button-toggle="left" -->
+			<a class="button button-icon icon ion-navicon" ng-click="toggleLeft()"></a> 
+			<h1 class="title">Side Menu Content Title</h1>
+			<div class="buttons">
+			<a class="button button-icon icon ion-nuclear" ng-click="toggleRight()"></a>
+			<a menu-close class="button button-icon icon ion-home"></a>
+			</div>
+			</ion-header-bar>
+			
+			
+
+			<ion-content>
+				<ion-list>
+					<ion-item ng-repeat="item in items">{{item}}</ion-item>
+				</ion-list>
+			</ion-content>
+	</ion-nav-view>
+	</ion-side-menu-content>
+
+<!-- Right Side -->
+<ion-side-menu side="right" is-enabled="true">
+	<ion-header-bar class="bar-assertive">
+		<h2 class="title">Right Side</h2>
+	</ion-header-bar>
+	<ion-content>
+		<ion-list>
+			<ion-item>Right Side Content	</ion-item>
+			<ion-item ng-repeat="item in items">{{item}}</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-side-menu>
+
+<!-- Left Side
+Using large as the attribute's value is a shortcut value to (min-width:768px) since it is the most common use-case. However, for added flexibility, any valid media query could be added as the value, such as (min-width:600px) or even multiple queries such as (min-width:750px) and (max-width:1200px). 
+expose-aside-when="large"
+is-enabled="true"
+-->
+<ion-side-menu side="left"  >
+	<ion-header-bar>
+		<h2 class="title">Left Side Menu</h2>
+	</ion-header-bar>
+	<ion-content>
+		<ion-list>
+			<ion-item class="item-divider">Left Side Content</ion-item>
+			<ion-item ng-repeat="item in items">{{item}}</ion-item>
+		</ion-list>
+	</ion-content>
+<ion-side-menu> 
+
+
+
+</ion-side-menus>
+
+<script type="text/javascript">
+
+ angular.module('ionic-sideMenus',['ionic'])
+ .controller('SideMenusCtrl',function($scope,$ionicSideMenuDelegate){
+ 	$scope.toggleLeft=function(){
+ 		$ionicSideMenuDelegate.toggleLeft();
+ 		//$ionicSideMenuDelegate.$getByHandle('$scope.handle').toggleLeft();
+ 	}
+ 	$scope.handle=function(){
+ 		alert(1);
+ 	}
+ 	$scope.toggleRight=function(){
+ 		$ionicSideMenuDelegate.toggleRight();
+ 	}
+
+
+
+ 	$scope.items=['HTML 5','CSS 3','Javascript'];
+ });
+</script>
+</body>
+</html>

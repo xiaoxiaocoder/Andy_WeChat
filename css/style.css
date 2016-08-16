@@ -1,0 +1,35 @@
+/* Empty. Add your own CSS if you like */
+.item-text-right{
+	position: relative;
+}
+.item-text-right span:last-child{
+	position: absolute;
+	right: 1rem;
+	top:35%;
+}
+body {
+  cursor: url('../img/finger.png'), auto;
+}
+
+h2.item-title{
+	padding-left: 1rem;
+}
+.item-sm-divider{
+	min-height: 15px;
+}
+img.badge:after{
+	content:"";
+	width: 10px;
+	height: 10px;
+	top: 4%;
+	margin-top: 0;
+    color: #ddd;
+    border-style: solid;
+    border-width: 0 0 0 0;
+    border-color: #ddd;
+}
+
+.item-me-text {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
